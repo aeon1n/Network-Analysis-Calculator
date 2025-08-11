@@ -36,5 +36,5 @@
 			onchange={handleFileChange}
 		/>
 	</div>
-	<span class="ml-4">{fileName != '' ? fileName : 'no file selected'}</span>
+	<span class="ml-4 italic">{fileName != '' ? fileName : 'no file selected'}</span>
 </form>
