@@ -4,8 +4,16 @@
 	import Upload from '../components/Upload.svelte';
 	import Papa from 'papaparse';
 
+	let fileContents = $state('');
+	let parsedCsv: Papa.ParseResult<unknown> | undefined = $state();
+
 	function onCsvInsert(csvData: Papa.ParseResult<unknown>) {
-		console.log(csvData);
+		parsedCsv = csvData;
+	}
+
+	function onCsvUpload(csvData: string) {
+		fileContents = csvData;
+		parsedCsv = Papa.parse(csvData);
 	}
 </script>
 
@@ -16,8 +24,8 @@
 		eingeben:
 	</h3>
 	<form>
-		<Upload />
-		<Textinput {onCsvInsert} />
+		<Upload {onCsvUpload} />
+		<Textinput {onCsvInsert} data={fileContents} />
 	</form>
 	<hr class="mt-8 mb-4 text-gray-200" />
 	<Preview />

@@ -1,10 +1,19 @@
 <script lang="ts">
 	import Papa from 'papaparse';
 
-	const { onCsvInsert } = $props<{ onCsvInsert: (data: Papa.ParseResult<unknown>) => void }>();
+	const { data, onCsvInsert } = $props<{
+		data: unknown;
+		onCsvInsert: (data: Papa.ParseResult<unknown>) => void;
+	}>();
 
 	let csvString = $state('');
 	let csvParse: Papa.ParseResult<unknown>;
+
+	$effect(() => {
+		if (data && csvString === '') {
+			csvString = data;
+		}
+	});
 
 	function submitHandler(e: Event) {
 		e.preventDefault();
