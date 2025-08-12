@@ -5,7 +5,6 @@
 	import type { Task } from '../types/Task';
 
 	export let tasks: Task[] = [];
-	export let criticalPath: string[] = [];
 	let svgElement: SVGSVGElement | null = null;
 	let direction: 'LR' | 'TB' = 'LR';
 
@@ -41,6 +40,8 @@
 					if (p !== '-') g.setEdge(p, t.id);
 				});
 			}
+
+			console.log(t);
 		});
 
 		dagre.layout(g);
@@ -86,31 +87,36 @@
 			.attr('height', (d) => d.height)
 			.attr('rx', 6)
 			.attr('stroke', 'black')
-			.attr('fill', (d) =>
-				criticalPath.includes(d.id) || d.task?.slack === 0 ? '#f87171' : '#60a5fa'
-			);
+			.attr('fill', (d) => (d.task?.slack === 0 ? '#f87171' : '#60a5fa'));
 
 		const textGroup = nodesGroup.append('g').attr('transform', `translate(10, 20)`);
 
 		textGroup
 			.append('text')
-			.attr('font-size', 12)
+			.attr('font-size', 11)
 			.attr('fill', 'white')
-			.text((d) => `ID: ${d.task?.id}`);
+			.text((d) => `${d.task?.id}: ${d.task?.name}`);
 
 		textGroup
 			.append('text')
 			.attr('y', 15)
-			.attr('font-size', 12)
+			.attr('font-size', 11)
 			.attr('fill', 'white')
-			.text((d) => `Name: ${d.task?.name}`);
+			.text((d) => `FAZ: ${d.task?.earlyStart}, FEZ: ${d.task?.earlyFinish}`);
 
 		textGroup
 			.append('text')
 			.attr('y', 30)
-			.attr('font-size', 12)
+			.attr('font-size', 11)
 			.attr('fill', 'white')
-			.text((d) => `Dauer: ${d.task?.duration}`);
+			.text((d) => `Dauer: ${d.task?.duration}, FP: ${d.task?.slack}`);
+
+		textGroup
+			.append('text')
+			.attr('y', 45)
+			.attr('font-size', 11)
+			.attr('fill', 'white')
+			.text((d) => `SAZ: ${d.task?.lateStart}, SEZ: ${d.task?.lateFinish}`);
 
 		const graphWidth = g.graph().width || svgElement.clientWidth;
 		const graphHeight = g.graph().height || svgElement.clientHeight;
