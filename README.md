@@ -1,38 +1,33 @@
-# sv
+# Netzplanberechnung – Webanwendung
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Eine Webanwendung zur Berechnung und Visualisierung von Netzplänen.  
+Entwickelt als beispielhaftes IHK-Projekt.
 
-## Creating a project
+## Funktionen
 
-If you're seeing this, you've probably already done this step. Congrats!
+- Import von Netzplan-Daten aus CSV-Dateien
+- Automatische Berechnung der Netzplantechnik
+- Grafische Darstellung als interaktiver Netzplan (Zoom, Pan, Layoutwechsel)
+- Hervorhebung des kritischen Pfads
+- Export als SVG-Datei
 
-```sh
-# create a new project in the current directory
-npx sv create
+## Technologien
 
-# create a new project in my-app
-npx sv create my-app
-```
+- **TypeScript** & **SvelteKit**
+- **Tailwind CSS** für das UI-Design
+- **D3.js** / **DagreJS** für die Visualisierung
+- Git & GitHub für die Versionsverwaltung
 
-## Developing
+## Installation
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+```bash
+# Repository klonen
+git clone https://github.com/USERNAME/REPO.git
+cd REPO
 
-```sh
+# Abhängigkeiten installieren
+npm install
+
+# Entwicklungsserver starten
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.

@@ -1,7 +1,7 @@
 import type { Task } from '../types/Task';
 
+// 1. CSV in Tasks umwandeln
 export function calculateNetworkPlan(raw: unknown[][]): Task[] {
-	// 1. CSV in Tasks umwandeln
 	const tasks: Task[] = raw.map((row) => ({
 		id: String(row[0]),
 		name: String(row[1]),
@@ -12,7 +12,6 @@ export function calculateNetworkPlan(raw: unknown[][]): Task[] {
 				: String(row[3])
 						.split(',')
 						.map((p) => p.trim()),
-		// optionale Felder initial leer
 		earlyStart: 0,
 		earlyFinish: 0,
 		lateStart: 0,
